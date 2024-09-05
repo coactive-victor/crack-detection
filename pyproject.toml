@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "fiap-crack-detection"
+version = "0.1.0"
+description = ""
+authors = ["coactive-victor <victor@coactive.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+boto3 = "^1.35.13"
+fastapi = "^0.111.0"
+alembic = "^1.13.2"
+sqlalchemy = "^2.0.31"
+pydantic-settings = "^2.3.4"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.13.0"
+ruff = "^0.4.8"
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+preview = true
+select = ["I", "F", "E", "W", "PL", "PT"]
+
+[tool.ruff.format]
+preview = true
+quote-style = "double"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+
+[tool.taskipy.tasks]
+lint = 'ruff check . && ruff check . --diff'
+format = 'ruff check . --fix && ruff format .'
+run = 'fastapi dev app/app.py --port 8001'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
