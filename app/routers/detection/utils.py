@@ -1,6 +1,7 @@
 import io
 
 from fastapi import UploadFile
+from mypy_boto3_s3 import S3Client
 from PIL import Image
 
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}
@@ -24,3 +25,14 @@ def is_image_file(file: UploadFile) -> bool:
         return False
 
     return True
+
+
+def upload_image_to_s3(
+    image_data: io.BytesIO,
+    bucket_name: str,
+    object_key: str,
+    s3_client: S3Client,
+) -> None:
+    """Uploads an image to an S3 bucket."""
+    s3_client.upload_fileobj(image_data, bucket_name, object_key)
+    print(f"Image successfully uploaded to s3://{bucket_name}/{object_key}")
