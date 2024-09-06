@@ -1,0 +1,7 @@
+services:
+  techinspect_app:
+    image: techinspect_app
+    env_file: .env
+    build: .
+    ports:
+      - "8000:8000"

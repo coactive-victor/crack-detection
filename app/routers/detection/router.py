@@ -73,4 +73,8 @@ async def detect_image(
         s3_client=s3_client,
     )
 
-    return DetectImageResponse(message="Images successfully processed and uploaded to S3.", s3_uri=s3_uri)
+    return DetectImageResponse(
+        operation_id=operation_id,
+        message="Images successfully processed and uploaded to S3.",
+        s3_uri=s3_uri,
+    )

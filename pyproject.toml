@@ -12,6 +12,8 @@ boto3 = "^1.35.13"
 pydantic-settings = "^2.3.4"
 boto3-stubs = {extras = ["s3"], version = "^1.35.13.post1"}
 pillow = "^10.4.0"
+opencv-python = "^4.10.0.84"
+numpy = "^2.1.1"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.13.0"
