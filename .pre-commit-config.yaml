@@ -1,0 +1,11 @@
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.8  # Same version as specified in pyproject.toml
+    hooks:
+      - id: ruff
+        args: ['--fix']  # Automatically fix issues and format code
+        additional_dependencies: []
+      - id: ruff
+        name: "ruff-lint"
+        args: ['check', '.']
