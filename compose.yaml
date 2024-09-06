@@ -1,6 +1,6 @@
 services:
-  techinspect_app:
-    image: techinspect_app
+  crack_detection:
+    image: crack_detection
     env_file: .env
     build: .
     ports:
