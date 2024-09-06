@@ -20,7 +20,13 @@ router = APIRouter(prefix="/detection", tags=["detection"])
 settings = Settings()
 
 
-@router.post(path="/", status_code=status.HTTP_200_OK, response_model=DetectImageResponse)
+@router.post(
+    path="/",
+    status_code=status.HTTP_200_OK,
+    response_model=DetectImageResponse,
+    summary="Crack detection",
+    description="Detect a crack in an image with computer vision",
+)
 async def detect_image(
     s3_client: S3Client = Depends(get_s3_client),
     file: UploadFile = File(...),
