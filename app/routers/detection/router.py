@@ -1,11 +1,12 @@
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, File, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from mypy_boto3_s3 import S3Client
 from sqlalchemy.orm import Session
 
 from app.db.database import get_session
 from app.db.s3 import get_s3_client
+from app.routers.detection.utils import is_image_file
 from app.settings import Settings
 
 router = APIRouter(prefix="/detection", tags=["detection"])
@@ -22,7 +23,13 @@ async def detect_image(
     s3_client: S3Client = Depends(get_s3_client),
     file: UploadFile = File(...),
 ):
+    if not is_image_file(file):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid image file")
+
     image_id = uuid4()
+
+    # Rewind file pointer after PIL read
+    file.file.seek(0)
 
     # Get the file's content and metadata
     file_content = await file.read()
