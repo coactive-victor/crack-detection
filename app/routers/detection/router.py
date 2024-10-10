@@ -79,8 +79,12 @@ async def detect_image(
         s3_client=s3_client,
     )
 
+    images_list = ["original_image.png", "edges_image.png", "highlighted_crack.png"]
+    images = [f"https://coactive-victor.s3.us-east-2.amazonaws.com/{folder_name}/{image}" for image in images_list]
+
     return DetectImageResponse(
         operation_id=operation_id,
         message="Images successfully processed and uploaded to S3.",
         s3_uri=s3_uri,
+        images=images,
     )

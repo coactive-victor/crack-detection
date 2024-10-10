@@ -21,6 +21,11 @@ class DetectImageResponse(BaseModel):
         example=f"s3://{cc.BUCKET_NAME}/{cc.OUTBOUND_FOLDER}/{cc.OPERATION_ID_EXAMPLE}/",
         nullable=False,
     )
+    images: list[str] = Field(
+        description="List of images uploaded to S3",
+        example=[],
+        nullable=False,
+    )
 
     @staticmethod
     def get_class_example():
@@ -29,6 +34,7 @@ class DetectImageResponse(BaseModel):
             operation_id=cc.OPERATION_ID_EXAMPLE,
             message="Images successfully processed and uploaded to S3.",
             s3_uri=f"s3://{cc.BUCKET_NAME}/{cc.OUTBOUND_FOLDER}/{cc.OPERATION_ID_EXAMPLE}/",
+            images=[],
         )
 
     class Config:
