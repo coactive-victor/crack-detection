@@ -34,5 +34,5 @@ def upload_image_to_s3(
     s3_client: S3Client,
 ) -> None:
     """Uploads an image to an S3 bucket."""
-    s3_client.upload_fileobj(image_data, bucket_name, object_key)
+    s3_client.upload_fileobj(image_data, bucket_name, object_key, ExtraArgs={"ContentType": "image/jpeg"})
     print(f"Image successfully uploaded to s3://{bucket_name}/{object_key}")
